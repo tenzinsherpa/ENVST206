@@ -1,5 +1,5 @@
 #activity 2
-#the examples are on the top and the acitivty problems that require coding are at the bottom (for now)
+#the examples are on the top and the activity problems that require coding are at the bottom (for now)
 
 
 heights <- c(3,2,3)
@@ -123,7 +123,10 @@ character
 #integer data vector
 vecExample<- c(5, 67, 234, 1, 57)
 vecExample
-#factor data vector
+#factor data vector using the character data vector
+character <- c("dog", "cat", "fish","turtle","rhino")
+vecFactor <- as.factor(character)
+vecFactor
 
 #question 3
 help("hist")
