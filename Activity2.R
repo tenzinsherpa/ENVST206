@@ -167,13 +167,13 @@ totalPRCP
 #question 8
 #Aberdeen, WA US
 hist(totalPRCP$PRCP[totalPRCP$NAME == "ABERDEEN, WA US"],
-     freq=FALSE, 
+     freq=FALSE,
      main = "ABERDEEN, WA US",
      xlab = "Annual Percipitation (mm)", 
      ylab="Relative frequency",
      col="grey75",
      border="white")
-#Mandan
+#MANDAN EXPERIMENT STATION, ND US
 hist(totalPRCP$PRCP[totalPRCP$NAME == "MANDAN EXPERIMENT STATION, ND US"],
      freq=FALSE, 
      main = "MANDAN EXPERIMENT STATION, ND US",
