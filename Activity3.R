@@ -28,6 +28,9 @@ bartlett.test(ch4$CH4_Flux ~ ch4$herbivory)
 #t-test
 t.test(ch4$CH4_Flux ~ ch4$herbivory)
 
+#question 2
+help(t.test)
+
 #read in insect data
 datI <- read.csv("/Users/TenzinSherpa/Documents/a03/insect_richness.csv")
 
@@ -66,6 +69,8 @@ tapply(datI$Richness, datI$urbanName, "mean")
 species <- matrix(c(18,8,15,32), ncol=2, byrow = TRUE) 
 colnames(species) <- c("Not protected", "Protected")
 rownames(species) <- c("Declining", "Stable/Increase")
+#to see the values of the mosaic and know the expected values
+species
 
 #make a mosaic plot with an informative title and axes labels
 mosaicplot(species, xlab="population status", ylab="legal protection",
@@ -73,5 +78,3 @@ mosaicplot(species, xlab="population status", ylab="legal protection",
 
 #Conduct a chi-squared test
 chisq.test(species)
-
-help(t.test)
