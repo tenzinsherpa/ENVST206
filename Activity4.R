@@ -108,5 +108,6 @@ plot(mlFitted, mlr.res,
      ylab = "standardized residual")
 abline(h=0)
 
+summary(mlr)
 
 
