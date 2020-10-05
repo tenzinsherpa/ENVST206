@@ -13,7 +13,7 @@ plot(datB$dams.n, datB$area.h,
      ylab = "Surface water area (ha)",
      xlab =  "Number of beaver dams")
 
-#set up regression
+#set up regressio
 dam.mod <- lm(datB$area.ha ~ datB$dams.n)
 View(dam.mod)
 
