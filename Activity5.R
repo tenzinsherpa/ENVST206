@@ -58,10 +58,9 @@ legend("topleft", #position
 #remove NA using na.omit
 datE <- na.omit(data.frame(NAME=datW$NAME,
                            year=datW$year,
-                           PRCP=datW$TMAX))
+                           TMAX=datW$TMAX))
 
-#total annual precipitation (mm)
-Tmaxave <- aggregate(datW$TMAX, by=list(datW$NAME,datW$year), FUN="mean", na.rm=TRUE)
+
 #use aggregate to get total annual precipitation
 Tmaxave <- aggregate(datE$TMAX, by=list(datE$NAME,datE$year), FUN="mean", na.rm=TRUE)
 #rename columns
@@ -76,24 +75,23 @@ tm <- Tmaxave[Tmaxave$ncount >=364, ]
 nd <- tm[tm$NAME == nameS[3], ]
 newy <- tm[tm$NAME == nameS[5], ]
 
-plot(nd$year, nd$totalP,
+plot(nd$year, nd$TMAX,
      type = "b",
      pch = 19,
-     ylab = "Annual precipitation (mm)",
+     ylab = "Average Annual Maximum Temperature (C)",
      xlab = "Year", 
      yaxt = "n",
-     ylim =c(0, 1600),
-     xlim = c(1930, 2019) )
+     ylim =c(5, 15))
 #add y axis
-axis(2, seq(0,1600, by=400), las=2 )
+axis(2, seq(5,15, by=5), las=2 )
 #add new york
-points(newy$year, newy$totalP,
+points(newy$year, newy$TMAX,
        type = "b",
        pch = 19,
        col="tomato3")
 #add legend
 
-legend("topleft", #position
+legend("bottomleft", #position
        c("North Dakota", "New York"), #labels
        col= c("black", "tomato3"), #colors
        pch=19, #point shape
@@ -121,6 +119,14 @@ ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+
   theme_classic()+
   scale_color_manual(values = c("#7FB3D5","#34495E", "#E7B800", "#FC4E07","#26A69A"))
 
+#question 5
+ggplot(data = pr, aes(x = year, y=totalP, color=NAME ) )+
+  geom_point(alpha=0.5)+
+  geom_path(alpha=0.5)+
+  labs(x="year", y="Annual Precipitation")+
+  theme_classic()+
+  scale_color_manual(values = c("#E69F00","#56B4E9", "#D55E00", "#F0E442","#0072B2"))
+
 ggplot(data = datW, aes(x=NAME, y=TMIN))+ #look at daily tmin
   geom_violin(fill=rgb(0.933,0.953,0.98))+ #add a violin plot with blue color
   geom_boxplot(width=0.2,size=0.25, fill="grey90")+ #add grey boxplots and make them about 20% smaller than normal with 25% thinner lines than normal
@@ -135,25 +141,45 @@ sub <- datW[datW$NAME == nameS[4] & datW$ year == 1974,]
 #%d means day
 sub$DATE <- as.Date(sub$DATE,"%Y-%m-%d")
 
+
 #question 7
-ggplot(data = sub, aes(x=DATE, y=TMAX))+
+ ggplot(data = sub, aes(x=DATE, y=TMAX))+
   geom_point()+
   geom_path()+
   theme_classic()+
   labs(x="year", y="Maximimum temperature (C)")
 
-ggplot(data=sub, aes(x=DATE, y=PRCP))+
-  geom_col(fill="royalblue3")+
-  theme_classic()+
-  labs(x="year", y="Daily precipitation (mm)")
+ ggplot(data=sub, aes(x=DATE, y=PRCP))+
+   geom_col(fill="royalblue3")+
+   theme_classic()+
+   labs(x="year", y="Daily precipitation (mm)")
 
-#ggplot(data= pr,
-      # aes(x= year,
-        #   y= totalP,
-         #  color = NAME))+
- # geom_point()+
- # geom_path()+
- # labs(x= "year", y= "Annual precipitation (mm)")+
- # theme_classic()+
-  
-
+#question 8
+ sub <- datW[datW$NAME == nameS[2] & datW$ year == 1974,]
+ 
+ #specify date format
+ #%Y means a four number year 
+ #- indicates that the date uses dashes to separate
+ #%m means month
+ #%d means day
+ sub$DATE <- as.Date(sub$DATE,"%Y-%m-%d")
+ 
+ ggplot(data = sub, aes(x=DATE, y=TMAX))+
+   geom_point()+
+   geom_path()+
+   theme_classic()+
+   labs(x="year", y="Maximimum temperature (C)")
+ 
+ ggplot(data=sub, aes(x=DATE, y=PRCP))+
+   geom_col(fill="royalblue3")+
+   theme_classic()+
+   labs(x="year", y="Daily precipitation (mm)")
+ 
+#question 9
+ mnaz <- datW[datW$NAME == nameS[3] & datW$year >= 2000,]
+ mnaz$DATE <- as.Date(mnaz$DATE,"%Y-%m-%d")
+ ggplot(data = mnaz, aes(x=DATE, y=TMIN))+
+   geom_point()+
+   geom_path()+
+   theme_classic()+
+   labs(x="year", y="Minimum temperature (C)")
